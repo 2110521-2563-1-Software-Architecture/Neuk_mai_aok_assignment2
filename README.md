@@ -1,6 +1,6 @@
 # Neuk_mai_aok_assignment2
 
-#Members
+# Members
 
 	Wutipong	Thabsuwan 		6030539621
 	Thus		Karnjanapatchara 	6030276521
