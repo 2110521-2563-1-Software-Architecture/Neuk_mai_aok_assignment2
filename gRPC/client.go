@@ -92,11 +92,17 @@ var commands = map[string]struct {
 		do:    doMulInsert,
 		usage: "client.go multi_insert <id1> <title1> <author1> <id2> <title2> <author2> <id3> <title3> <author3>",
 	},
-	"multi_client_insert_get_delete": {
-		name:  "multi_insert",
-		desc:  "Inserts the provided books",
+	"multi_client": {
+		name:  "multi_client",
+		desc:  "multi_client",
 		do:    doMulClientInsertGetDelete,
 		usage: "client.go multi_client <id> <title> <author>",
+	},
+	"multi_concurrent_call": {
+		name:  "multi_concurrent_call",
+		desc:  "Concurrrentcall the provided books",
+		do:    doConcurrentCall,
+		usage: "client.go multi_concurrent_call <id> <title> <author> <num_of_book>",
 	},
 	"delete": {
 		name:  "delete",
@@ -267,6 +273,33 @@ func doMulClientInsertGetDelete(ctx context.Context, args ...string) {
 
 	fmt.Printf("Server response time is ",time.Since(start))
 }
+// doInsert is a basic wrapper around the corresponding book service's RPC.
+// It parses the provided arguments, calls the service, and prints the
+// response. If any errors are encountered, it dies.
+func doConcurrentCall(ctx context.Context, args ...string) {
+	start := time.Now()
+	id, err := strconv.ParseInt(args[0], 10, 64)
+
+	if err != nil {
+		log.Fatalf("Provided ID %v invalid: %v", args[0], err)
+	}
+	book := &pb.Book{
+		Id:     int32(id),
+		Title:  args[1],
+		Author: args[2],
+	}
+
+	num_of_book, err := strconv.ParseInt(args[3], 10, 64)
+
+
+	conn, client := GetClient()
+	defer conn.Close()
+	for i := 0; i < int(num_of_book); i++ {
+		client.Insert(ctx, book)
+	}
+	fmt.Printf("Server response time is ",time.Since(start))
+}
+
 // doWatch is a basic wrapper around the corresponding book service's RPC.
 // It parses the provided arguments, calls the service, and prints the
 // response. If any errors are encountered, it dies.

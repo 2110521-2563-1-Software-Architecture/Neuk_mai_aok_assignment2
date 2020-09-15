@@ -3,6 +3,7 @@ const io = require("socket.io-client");
 const promptly = require("promptly");
 const BASE_URL = 'http://localhost:3000';
 
+
 let socket = io.connect(BASE_URL);
 
 const watchBooks = async() => {
@@ -10,6 +11,7 @@ const watchBooks = async() => {
 }
 
 const listBooks = async () => {
+  let beforeSend = new Date();
   const res = await axios.get(`${BASE_URL}/books`);
   const books = res.data;
   let afterSend = new Date();
@@ -37,9 +39,9 @@ const multi_insertBook = async (id1, title1, author1, id2, title2, author2, id3,
   var book2 = { id: parseInt(id2), title: title2, author: author2 };
   var book3 = { id: parseInt(id3), title: title3, author: author3 };
   let beforeSend = new Date();
-  let res1 = await axios.post(`${BASE_URL}/insert`,book1);
-  let res2 = await axios.post(`${BASE_URL}/insert`,book2);
-  let res3 = await axios.post(`${BASE_URL}/insert`,book3);
+  await axios.post(`${BASE_URL}/insert`,book1);
+  await axios.post(`${BASE_URL}/insert`,book2);
+  await axios.post(`${BASE_URL}/insert`,book3);
 
   let afterSend = new Date();
   socket.emit('insert',book1)
@@ -52,9 +54,9 @@ const multi_insertBook = async (id1, title1, author1, id2, title2, author2, id3,
 const multi_client_insert_get_delete_Book = async (id, title, author) => {
   let beforeSend = new Date();
   var book = { id: parseInt(id), title: title, author: author };
-  let res1 = await axios.post(`${BASE_URL}/insert`,book);
-  let res2 = await axios.get(`${BASE_URL}/book/${id}`);
-  let res3 = await axios.delete(`${BASE_URL}/delete/${id}`);
+  await axios.post(`${BASE_URL}/insert`,book);
+  await axios.get(`${BASE_URL}/book/${id}`);
+  await axios.delete(`${BASE_URL}/delete/${id}`);
 
   socket.emit('insert',book)
   let afterSend = new Date();
@@ -71,26 +73,25 @@ const getBook = async (id) => {
   return book;
 };
 
-const multi_client_getBook = async (id) => {
-  let beforeSend = new Date();
-  const res1 = await axios.get(`${BASE_URL}/book/${id}`);
-
-  const book1 = res1.data;
-
-  let afterSend = new Date();
-  console.log('multi client getBook response time is ',afterSend-beforeSend,' ms');
-
-};
 
 const multi_call_getBook = async (id, num) => {
   let beforeSend = new Date();
 
-  for(var k=0;k<num;k++){
-    await axios.get(`${BASE_URL}/book/${id}`);
+  // for(var k=0;k<num;k++){
+  //   await axios.get(`${BASE_URL}/book/${id}`);
 
-  }
-  let afterSend = new Date();
-  console.log('getBook ',num ,'request, response time is ',afterSend-beforeSend,' ms');
+  // }
+  // let afterSend = new Date();
+  // console.log('getBook ',num ,'request, response time is ',afterSend-beforeSend,' ms');
+  let hrstart = process.hrtime();
+  let arr = [];
+  for(let j=0; j<num ; j++)arr.push(axios.get(`${BASE_URL}/book/${id}`))
+  await Promise.all(arr).then(response => {
+    let hrend = process.hrtime(hrstart)
+    // console.log(process.hrtime(hrstart), n)
+    let afterSend = new Date();
+    console.log('getBook ',num ,'request, response time is ',afterSend-beforeSend,' ms');
+})
 };
 
 const deleteBook = async (id) => {
@@ -116,9 +117,8 @@ const benchmark_single_insert = async ()=>{
   let title = process.argv.shift();
   let author = process.argv.shift();
 
-  for(let i = 0;i<10;i++){
-    insertBook(id_book, title, author);
-  }
+  
+  insertBook(id_book, title, author);
 }
 
 const benchmark_multiple_insert = async ()=>{
