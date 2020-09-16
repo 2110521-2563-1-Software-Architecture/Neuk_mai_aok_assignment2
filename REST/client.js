@@ -77,21 +77,14 @@ const getBook = async (id) => {
 const multi_call_getBook = async (id, num) => {
   let beforeSend = new Date();
 
-  // for(var k=0;k<num;k++){
-  //   await axios.get(`${BASE_URL}/book/${id}`);
-
-  // }
-  // let afterSend = new Date();
-  // console.log('getBook ',num ,'request, response time is ',afterSend-beforeSend,' ms');
   let hrstart = process.hrtime();
   let arr = [];
   for(let j=0; j<num ; j++)arr.push(axios.get(`${BASE_URL}/book/${id}`))
   await Promise.all(arr).then(response => {
     let hrend = process.hrtime(hrstart)
-    // console.log(process.hrtime(hrstart), n)
     let afterSend = new Date();
     console.log('getBook ',num ,'request, response time is ',afterSend-beforeSend,' ms');
-})
+  })
 };
 
 const deleteBook = async (id) => {
