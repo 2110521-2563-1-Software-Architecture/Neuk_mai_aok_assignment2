@@ -11,6 +11,9 @@
 # Things to be delivered:
 
 1. Graphs showing the benchmarking results with the explanation of your experimental settings.
+![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/1.png | width=100)
+![C](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/2.png | width=100)
+ 
 
 2. Discussion of the results why one method is better the other in which scenarios.
 โดยรวมส่วนใหญ่ gRPC จะเร็วกว่า REST ในทุกๆกรณีสาเหตุมาจากวิธีการส่งข้อมูลของ gRPC นั้นใช้ http/2 ส่วน REST ส่งผ่าน http/1.1 และ gRPC นั้นมี protobuf ที่ส่งแบบ binary ซึ่งแตกต่างจาก REST ที่ส่งแบบ JSON ซึ่ง JSON นั้นมีขนาดใหญ่กว่าทำให้ส่งช้ากว่านั่นเอง
