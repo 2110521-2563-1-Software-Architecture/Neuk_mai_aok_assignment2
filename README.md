@@ -11,7 +11,7 @@
 # Things to be delivered:
 
 1. Graphs showing the benchmarking results with the explanation of your experimental settings.
-ทำการวัดผล 10 ครั้งและนำค่ามาหา average และนำไป plot
+
 ![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/1.png)
 ![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/2.png)
 ![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/3.png)
@@ -32,4 +32,4 @@
 
 4. Does your results comply with the results in https://medium.com/@bimeshde/grpc-vs-rest-performance-simplifiedfd35d01bbd4? How?
 
-ผลลัพธ์ที่ได้สอดคล้องเดียวกับ medium ที่ว่า gRPC นั้น performance ดีกว่า REST
+ผลลัพธ์ที่ได้สอดคล้องเดียวกับ medium ที่ว่า gRPC นั้น performance ดีกว่า REST อันเนื่องมาจาก HTTP/2 และ การส่งข้อมูลแบบ binary
