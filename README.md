@@ -11,6 +11,7 @@
 # Things to be delivered:
 
 1. Graphs showing the benchmarking results with the explanation of your experimental settings.
+ทำการวัดผล 10 ครั้งและนำค่ามาหา average และนำไป plot
 ![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/1.png)
 ![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/2.png)
  โดยเราจะได้ทำการเซ็ต Date.now() ก่อนและหลังการส่ง request (รูปข้างล่าง) เพื่อเป็นการเก็บช่วงระยะเวลาในการยิงหลังจากนั้นนำไปลบกันก็จะได้เป็น response time และ นำทุก response time มา plot เป็นกราฟแบบที่เห็นข้างบน
