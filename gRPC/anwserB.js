@@ -19,26 +19,26 @@ const multiClientCall = async (num_of_client) => {
     for(let i=0;i<num_of_client;i++){
         if(i % 4 == 0){//Insert
             client.insert(book, function(error, empty) {
-                printResponse(error, empty);
+                //printResponse(error, empty);
             });
         }
         else if(i % 4 == 1){//Get specific book
             client.get({
                 id: 1
             }, function(error, book) {
-                printResponse(error, book);
+                //printResponse(error, book);
             });
         }
         else if(i % 4 == 2){//List book
             client.list({}, function(error, books) {
-                printResponse(error, books);
+                //printResponse(error, books);
             });
         }
         else if(i % 4 == 3){//Delete
             client.delete({
                 id: 1
             }, function(error, empty) {
-                printResponse(error, empty);
+                //printResponse(error, empty);
             });
         }
     }
