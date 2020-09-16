@@ -11,8 +11,8 @@
 # Things to be delivered:
 
 1. Graphs showing the benchmarking results with the explanation of your experimental settings.
-![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/1.png | width=100)
-![C](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/2.png | width=100)
+![](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/1.png)
+![C](https://github.com/2110521-2563-1-Software-Architecture/Neuk_mai_aok_assignment2/blob/master/anwser_capture/response_time/2.png)
  
 
 2. Discussion of the results why one method is better the other in which scenarios.
